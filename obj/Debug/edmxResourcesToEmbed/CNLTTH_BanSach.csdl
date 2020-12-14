@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CNLTTH_BanSachModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Sach">
+    <Key>
+      <PropertyRef Name="MaSach" />
+    </Key>
+    <Property Name="MaSach" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gia" Type="Int32" />
+    <Property Name="TonKho" Type="Int32" />
+    <Property Name="SoTrang" Type="Int32" />
+    <Property Name="NgayXuatBan" Type="DateTime" Precision="0" />
+    <Property Name="MaTacGia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="MaTheLoai" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="AnhSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaNhanVien" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CTHoaDons" Relationship="CNLTTH_BanSachModel.FK__CTHoaDon__MaSach__37A5467C" FromRole="Sach" ToRole="CTHoaDon" />
+    <NavigationProperty Name="NhanVien" Relationship="CNLTTH_BanSachModel.FK__Sach__MaNhanVien__32E0915F" FromRole="Sach" ToRole="NhanVien" />
+    <NavigationProperty Name="TacGia" Relationship="CNLTTH_BanSachModel.FK__Sach__MaTacGia__33D4B598" FromRole="Sach" ToRole="TacGia" />
+    <NavigationProperty Name="TheLoai" Relationship="CNLTTH_BanSachModel.FK__Sach__MaTheLoai__31EC6D26" FromRole="Sach" ToRole="TheLoai" />
+  </EntityType>
+  <EntityContainer Name="DBCNLTTH_BanSach" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Saches" EntityType="Self.Sach" />
+    <EntitySet Name="BoPhans" EntityType="CNLTTH_BanSachModel.BoPhan" />
+    <EntitySet Name="CTHoaDons" EntityType="CNLTTH_BanSachModel.CTHoaDon" />
+    <EntitySet Name="HoaDons" EntityType="CNLTTH_BanSachModel.HoaDon" />
+    <EntitySet Name="KhachHangs" EntityType="CNLTTH_BanSachModel.KhachHang" />
+    <EntitySet Name="NhanViens" EntityType="CNLTTH_BanSachModel.NhanVien" />
+    <EntitySet Name="TacGias" EntityType="CNLTTH_BanSachModel.TacGia" />
+    <EntitySet Name="TheLoais" EntityType="CNLTTH_BanSachModel.TheLoai" />
+    <AssociationSet Name="FK__NhanVien__MaBoPh__34C8D9D1" Association="CNLTTH_BanSachModel.FK__NhanVien__MaBoPh__34C8D9D1">
+      <End Role="BoPhan" EntitySet="BoPhans" />
+      <End Role="NhanVien" EntitySet="NhanViens" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTHoaDon__MaHoaD__36B12243" Association="CNLTTH_BanSachModel.FK__CTHoaDon__MaHoaD__36B12243">
+      <End Role="HoaDon" EntitySet="HoaDons" />
+      <End Role="CTHoaDon" EntitySet="CTHoaDons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTHoaDon__MaSach__37A5467C" Association="CNLTTH_BanSachModel.FK__CTHoaDon__MaSach__37A5467C">
+      <End Role="Sach" EntitySet="Saches" />
+      <End Role="CTHoaDon" EntitySet="CTHoaDons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HoaDon__MaKhachH__35BCFE0A" Association="CNLTTH_BanSachModel.FK__HoaDon__MaKhachH__35BCFE0A">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="HoaDon" EntitySet="HoaDons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sach__MaNhanVien__32E0915F" Association="CNLTTH_BanSachModel.FK__Sach__MaNhanVien__32E0915F">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="Sach" EntitySet="Saches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sach__MaTacGia__33D4B598" Association="CNLTTH_BanSachModel.FK__Sach__MaTacGia__33D4B598">
+      <End Role="TacGia" EntitySet="TacGias" />
+      <End Role="Sach" EntitySet="Saches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sach__MaTheLoai__31EC6D26" Association="CNLTTH_BanSachModel.FK__Sach__MaTheLoai__31EC6D26">
+      <End Role="TheLoai" EntitySet="TheLoais" />
+      <End Role="Sach" EntitySet="Saches" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BoPhan">
+    <Key>
+      <PropertyRef Name="MaBoPhan" />
+    </Key>
+    <Property Name="MaBoPhan" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TenBoPhan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NhanViens" Relationship="CNLTTH_BanSachModel.FK__NhanVien__MaBoPh__34C8D9D1" FromRole="BoPhan" ToRole="NhanVien" />
+  </EntityType>
+  <EntityType Name="CTHoaDon">
+    <Key>
+      <PropertyRef Name="MaSach" />
+      <PropertyRef Name="MaHoaDon" />
+    </Key>
+    <Property Name="MaSach" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="MaHoaDon" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SoLuong" Type="Int32" />
+    <NavigationProperty Name="HoaDon" Relationship="CNLTTH_BanSachModel.FK__CTHoaDon__MaHoaD__36B12243" FromRole="CTHoaDon" ToRole="HoaDon" />
+    <NavigationProperty Name="Sach" Relationship="CNLTTH_BanSachModel.FK__CTHoaDon__MaSach__37A5467C" FromRole="CTHoaDon" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="HoaDon">
+    <Key>
+      <PropertyRef Name="MaHoaDon" />
+    </Key>
+    <Property Name="MaHoaDon" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="MaKhachHang" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TenNguoiNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChiNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SDTNguoiNhan" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="TrangThai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CTHoaDons" Relationship="CNLTTH_BanSachModel.FK__CTHoaDon__MaHoaD__36B12243" FromRole="HoaDon" ToRole="CTHoaDon" />
+    <NavigationProperty Name="KhachHang" Relationship="CNLTTH_BanSachModel.FK__HoaDon__MaKhachH__35BCFE0A" FromRole="HoaDon" ToRole="KhachHang" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="MaKhachHang" />
+    </Key>
+    <Property Name="MaKhachHang" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TenKhachHhang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TenTaiKhoan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+    <Property Name="SDT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HoaDons" Relationship="CNLTTH_BanSachModel.FK__HoaDon__MaKhachH__35BCFE0A" FromRole="KhachHang" ToRole="HoaDon" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNhanVien" />
+    </Key>
+    <Property Name="MaNhanVien" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TenNhanVien" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TenTaiKhoan" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ChucVu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="SDT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Luong" Type="Int32" />
+    <Property Name="MaBoPhan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BoPhan" Relationship="CNLTTH_BanSachModel.FK__NhanVien__MaBoPh__34C8D9D1" FromRole="NhanVien" ToRole="BoPhan" />
+    <NavigationProperty Name="Saches" Relationship="CNLTTH_BanSachModel.FK__Sach__MaNhanVien__32E0915F" FromRole="NhanVien" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="TacGia">
+    <Key>
+      <PropertyRef Name="MaTacGia" />
+    </Key>
+    <Property Name="MaTacGia" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TenTacGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Saches" Relationship="CNLTTH_BanSachModel.FK__Sach__MaTacGia__33D4B598" FromRole="TacGia" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="TheLoai">
+    <Key>
+      <PropertyRef Name="MaTheLoai" />
+    </Key>
+    <Property Name="MaTheLoai" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TenTheLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Saches" Relationship="CNLTTH_BanSachModel.FK__Sach__MaTheLoai__31EC6D26" FromRole="TheLoai" ToRole="Sach" />
+  </EntityType>
+  <Association Name="FK__NhanVien__MaBoPh__34C8D9D1">
+    <End Type="CNLTTH_BanSachModel.BoPhan" Role="BoPhan" Multiplicity="0..1" />
+    <End Type="CNLTTH_BanSachModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BoPhan">
+        <PropertyRef Name="MaBoPhan" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="MaBoPhan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTHoaDon__MaHoaD__36B12243">
+    <End Type="CNLTTH_BanSachModel.HoaDon" Role="HoaDon" Multiplicity="1" />
+    <End Type="CNLTTH_BanSachModel.CTHoaDon" Role="CTHoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HoaDon">
+        <PropertyRef Name="MaHoaDon" />
+      </Principal>
+      <Dependent Role="CTHoaDon">
+        <PropertyRef Name="MaHoaDon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTHoaDon__MaSach__37A5467C">
+    <End Type="CNLTTH_BanSachModel.Sach" Role="Sach" Multiplicity="1" />
+    <End Type="CNLTTH_BanSachModel.CTHoaDon" Role="CTHoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="MaSach" />
+      </Principal>
+      <Dependent Role="CTHoaDon">
+        <PropertyRef Name="MaSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HoaDon__MaKhachH__35BCFE0A">
+    <End Type="CNLTTH_BanSachModel.KhachHang" Role="KhachHang" Multiplicity="0..1" />
+    <End Type="CNLTTH_BanSachModel.HoaDon" Role="HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKhachHang" />
+      </Principal>
+      <Dependent Role="HoaDon">
+        <PropertyRef Name="MaKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sach__MaNhanVien__32E0915F">
+    <End Type="CNLTTH_BanSachModel.NhanVien" Role="NhanVien" Multiplicity="0..1" />
+    <End Type="CNLTTH_BanSachModel.Sach" Role="Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sach__MaTacGia__33D4B598">
+    <End Type="CNLTTH_BanSachModel.TacGia" Role="TacGia" Multiplicity="0..1" />
+    <End Type="CNLTTH_BanSachModel.Sach" Role="Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TacGia">
+        <PropertyRef Name="MaTacGia" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="MaTacGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sach__MaTheLoai__31EC6D26">
+    <End Type="CNLTTH_BanSachModel.TheLoai" Role="TheLoai" Multiplicity="0..1" />
+    <End Type="CNLTTH_BanSachModel.Sach" Role="Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheLoai">
+        <PropertyRef Name="MaTheLoai" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="MaTheLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
